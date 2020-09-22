@@ -2,7 +2,6 @@ package com.malaxiaoyugan.test.service;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.malaxiaoyugan.test.vo.Query;
 import com.malaxiaoyugan.test.vo.QueryEntity;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
