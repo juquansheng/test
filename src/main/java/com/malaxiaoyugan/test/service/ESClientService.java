@@ -2,7 +2,10 @@ package com.malaxiaoyugan.test.service;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.malaxiaoyugan.test.vo.Query;
+import com.malaxiaoyugan.test.vo.QueryEntity;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.elasticsearch.action.admin.indices.alias.Alias;
 import org.elasticsearch.action.admin.indices.delete.DeleteIndexRequest;
 import org.elasticsearch.action.bulk.BulkRequest;
@@ -31,6 +34,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -48,8 +52,8 @@ import java.util.concurrent.TimeUnit;
 @Slf4j
 public class ESClientService {
 
-    @Autowired
-    private RestHighLevelClient client;
+    @Resource
+    private RestHighLevelClient restHighLevelClient;
 
     @Autowired
     private ObjectMapper mapper;
@@ -73,7 +77,7 @@ public class ESClientService {
         if (null != indexName && !"".equals(indexName)) {//别名
             request.alias(new Alias(indexName));
         }
-        CreateIndexResponse createIndexResponse = client.indices().create(request, RequestOptions.DEFAULT);
+        CreateIndexResponse createIndexResponse = restHighLevelClient.indices().create(request, RequestOptions.DEFAULT);
 
         // 6、处理响应
         boolean acknowledged = createIndexResponse.isAcknowledged();
@@ -91,7 +95,7 @@ public class ESClientService {
      */
     public boolean indexExists(String indexName) throws IOException {
         GetIndexRequest request = new GetIndexRequest(indexName);
-        return client.indices().exists(request, RequestOptions.DEFAULT);
+        return restHighLevelClient.indices().exists(request, RequestOptions.DEFAULT);
     }
 
     /**
@@ -139,7 +143,30 @@ public class ESClientService {
         builder.query(boolQueryBuilder).highlighter(highlightBuilder);
         request.source(builder);
         log.info("[搜索语句为:{}]",request.source().toString());
-        return client.search(request, RequestOptions.DEFAULT);
+        return restHighLevelClient.search(request, RequestOptions.DEFAULT);
+    }
+
+
+    /**
+     * 拼装查询条件
+     * @param query
+     * @return
+     */
+    public static BoolQueryBuilder buildEsParam(QueryEntity query) {
+
+        BoolQueryBuilder queryBuilder = QueryBuilders.boolQuery();
+
+        //filter 效率比 must高
+        if (StringUtils.isNotBlank(query.getName())) {
+            queryBuilder.filter(QueryBuilders.termQuery("name", query.getName()));
+        }
+
+        //时间段要有头有尾 不然会出现慢查询
+        if (null != query.getStartTime() && null != query.getEndTime()) {
+            queryBuilder.filter(QueryBuilders.rangeQuery("createTime").from( query.getStartTime()).to(query.getEndTime()));
+        }
+
+        return queryBuilder;
     }
 
     /**
@@ -168,7 +195,7 @@ public class ESClientService {
                 }
             }
         }
-        return client.bulk(request, RequestOptions.DEFAULT);
+        return restHighLevelClient.bulk(request, RequestOptions.DEFAULT);
     }
 
 
