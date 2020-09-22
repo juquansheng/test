@@ -1,0 +1,33 @@
+#spring:
+#  application:
+#    name: yifang-app
+#  profiles:
+#    active: dev
+
+server:
+  port: 10914
+  # ==============================================================
+  servlet:
+    context-path: /yuuki/test/
+spring:
+    profiles:
+      active: dev
+    jackson:
+      serialization:
+        write-dates-as-timestamps: true
+
+mapper:
+  mappers: com.malaxiaoyugan.test.BaseMapper
+  not-empty: false
+  identity: mysql
+# mybatis
+mybatis:
+  type-aliases-package: com.mxd.dao.entity
+  mapper-locations:  classpath*:mapper/*.xml
+  configuration:
+    jdbc-type-for-null: 'null'
+    map-underscore-to-camel-case: true
+    default-fetch-size: 100
+    default-statement-timeout: 3000
+    #log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+# ==============================================================
