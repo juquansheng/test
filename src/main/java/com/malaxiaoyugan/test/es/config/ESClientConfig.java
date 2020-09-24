@@ -1,4 +1,4 @@
-package com.malaxiaoyugan.test.config;
+package com.malaxiaoyugan.test.es.config;
 
 import org.apache.http.Header;
 import org.apache.http.HttpHost;

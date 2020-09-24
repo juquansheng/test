@@ -1,4 +1,4 @@
-package com.malaxiaoyugan.test.service;
+package com.malaxiaoyugan.test.es;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;

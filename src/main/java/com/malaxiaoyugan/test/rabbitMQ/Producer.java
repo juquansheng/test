@@ -3,7 +3,10 @@ package com.malaxiaoyugan.test.rabbitMQ;
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.ConnectionFactory;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 
 /**
  * description: Producer
@@ -11,22 +14,21 @@ import org.springframework.beans.factory.annotation.Value;
  * author: juquansheng
  * version: 1.0 <br>
  */
+@Component
 public class Producer {
     private final static String EXCHANGE_NAME = "TEST_EXCHANGE";
-    @Value("${rabbitmq.host}")
-    private String host;
-    @Value("${rabbitmq.port}")
-    private int port;
-    @Value("${rabbitmq.username}")
-    private String username;
-    @Value("${rabbitmq.password}")
-    private String password;
-    @Value("${rabbitmq.virtual-host}")
-    private String virtualHost;
-    @Value("${rabbitmq.publisher-confirms}")
-    private int publisherConfirms;
-    @Value("${rabbitmq.publisher-returns}")
-    private int publisherReturns;
+
+    @Autowired
+    private RabbitTemplate rabbitTemplate;
+
+    public  void send(){
+        rabbitTemplate.convertAndSend("DIRECT_EXCHANGE","wuzz.test","DIRECT_EXCHANGE message");
+        rabbitTemplate.convertAndSend("TOPIC_EXCHANGE","hangzhou.wuzz.test","TOPIC_EXCHANGE hangzhou message");
+        rabbitTemplate.convertAndSend("TOPIC_EXCHANGE","wenzhou.wuzz.test","TOPIC_EXCHANGE wenzhou message");
+        rabbitTemplate.convertAndSend("FANOUT_EXCHANGE","","FANOUT_EXCHANGE message");
+
+    }
+
 
     public static void main(String[] args) throws Exception {
         ConnectionFactory factory = new ConnectionFactory();

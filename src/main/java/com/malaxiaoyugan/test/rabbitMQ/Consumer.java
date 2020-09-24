@@ -2,6 +2,7 @@ package com.malaxiaoyugan.test.rabbitMQ;
 
 import com.rabbitmq.client.*;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 
@@ -11,24 +12,11 @@ import java.io.IOException;
  * author: juquansheng
  * version: 1.0 <br>
  */
+@Component
 public class Consumer {
     private final static String EXCHANGE_NAME = "TEST_EXCHANGE";
     private final static String QUEUE_NAME = "TEST_QUEUE";
 
-    @Value("${rabbitmq.host}")
-    private String host;
-    @Value("${rabbitmq.port}")
-    private int port;
-    @Value("${rabbitmq.username}")
-    private String username;
-    @Value("${rabbitmq.password}")
-    private String password;
-    @Value("${rabbitmq.virtual-host}")
-    private String virtualHost;
-    @Value("${rabbitmq.publisher-confirms}")
-    private int publisherConfirms;
-    @Value("${rabbitmq.publisher-returns}")
-    private int publisherReturns;
 
     public static void main(String[] args) throws Exception {
         ConnectionFactory factory = new ConnectionFactory();

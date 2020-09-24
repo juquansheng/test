@@ -1,6 +1,6 @@
 package com.malaxiaoyugan.test;
 
-import com.malaxiaoyugan.test.service.ESClientService;
+import com.malaxiaoyugan.test.es.ESClientService;
 import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.search.SearchHit;
 import org.elasticsearch.search.SearchHits;
