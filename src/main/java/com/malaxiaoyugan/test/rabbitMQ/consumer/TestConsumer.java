@@ -1,5 +1,6 @@
-package com.malaxiaoyugan.test.rabbitMQ.config;
+package com.malaxiaoyugan.test.rabbitMQ.consumer;
 
+import com.alibaba.fastjson.JSONObject;
 import org.springframework.amqp.rabbit.annotation.RabbitHandler;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.context.annotation.Configuration;
@@ -11,10 +12,13 @@ import org.springframework.context.annotation.Configuration;
  * version: 1.0 <br>
  */
 @Configuration
-@RabbitListener(queues = "FIRST_QUEUE")
-public class FirstConsumer {
+@RabbitListener(queues = "TEST_QUEUE")
+public class TestConsumer {
     @RabbitHandler
     public void process(String msg){
-        System.out.println("First Queue received msg : " + msg);
+        JSONObject jsonObject = JSONObject.parseObject(msg);
+        String o = jsonObject.getString("1");
+        System.out.println("1 : " + o);
+
     }
 }

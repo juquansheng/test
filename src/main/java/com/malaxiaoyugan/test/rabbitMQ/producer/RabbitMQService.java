@@ -1,4 +1,4 @@
-package com.malaxiaoyugan.test.service;
+package com.malaxiaoyugan.test.rabbitMQ.producer;
 
 import com.alibaba.fastjson.JSONObject;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;

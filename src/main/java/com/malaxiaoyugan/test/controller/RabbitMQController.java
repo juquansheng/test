@@ -1,11 +1,10 @@
 package com.malaxiaoyugan.test.controller;
 
 import com.alibaba.fastjson.JSONObject;
-import com.malaxiaoyugan.test.service.RabbitMQService;
+import com.malaxiaoyugan.test.rabbitMQ.producer.RabbitMQService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 /**

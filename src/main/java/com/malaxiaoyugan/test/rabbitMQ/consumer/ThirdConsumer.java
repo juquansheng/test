@@ -1,4 +1,4 @@
-package com.malaxiaoyugan.test.rabbitMQ.config;
+package com.malaxiaoyugan.test.rabbitMQ.consumer;
 
 import org.springframework.amqp.rabbit.annotation.RabbitHandler;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
@@ -11,10 +11,10 @@ import org.springframework.context.annotation.Configuration;
  * version: 1.0 <br>
  */
 @Configuration
-@RabbitListener(queues = "FOURTH_QUEUE")
-public class FourthConsumer {
+@RabbitListener(queues = "THIRD_QUEUE")
+public class ThirdConsumer {
     @RabbitHandler
     public void process(String msg){
-        System.out.println("fourth Queue received msg : " + msg);
+        System.out.println("third Queue received msg : " + msg);
     }
 }

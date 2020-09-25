@@ -1,4 +1,4 @@
-package com.malaxiaoyugan.test.rabbitMQ.config;
+package com.malaxiaoyugan.test.rabbitMQ.consumer;
 
 import org.springframework.amqp.rabbit.annotation.RabbitHandler;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
@@ -11,10 +11,10 @@ import org.springframework.context.annotation.Configuration;
  * version: 1.0 <br>
  */
 @Configuration
-@RabbitListener(queues = "SECOND_QUEUE")
-public class SecondConsumer {
+@RabbitListener(queues = "FIRST_QUEUE")
+public class FirstConsumer {
     @RabbitHandler
     public void process(String msg){
-        System.out.println("second Queue received msg : " + msg);
+        System.out.println("First Queue received msg : " + msg);
     }
 }
