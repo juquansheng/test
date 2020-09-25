@@ -21,11 +21,11 @@ public class RabbitMQController {
     private RabbitMQService rabbitMQService;
 
     @RequestMapping(value = "/get",method = RequestMethod.GET)
-    public String send(){
+    public String send(String one,String two,String three){
         JSONObject jsonObject = new JSONObject();
-        jsonObject.put("1","one");
-        jsonObject.put("2","two");
-        jsonObject.put("3","three");
+        jsonObject.put("1",one);
+        jsonObject.put("2",two);
+        jsonObject.put("3",three);
 
         rabbitMQService.send(jsonObject);
         return "success";

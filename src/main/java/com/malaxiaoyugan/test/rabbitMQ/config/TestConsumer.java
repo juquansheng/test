@@ -16,7 +16,6 @@ import org.springframework.context.annotation.Configuration;
 public class TestConsumer {
     @RabbitHandler
     public void process(String msg){
-        System.out.println("TEST_EXCHANGE Queue received msg : " + msg);
         JSONObject jsonObject = JSONObject.parseObject(msg);
         String o = jsonObject.getString("1");
         System.out.println("1 : " + o);
