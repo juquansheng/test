@@ -65,9 +65,9 @@ public class ESClientService {
         if (null != mapping && !"".equals(mapping)) {
             request.mapping(mapping, XContentType.JSON);
         }
-        if (null != indexName && !"".equals(indexName)) {//别名
-            request.alias(new Alias(indexName));
-        }
+//        if (null != indexName && !"".equals(indexName)) {//别名
+//            request.alias(new Alias(indexName));
+//        }
         CreateIndexResponse createIndexResponse = restHighLevelClient.indices().create(request, RequestOptions.DEFAULT);
 
         // 6、处理响应

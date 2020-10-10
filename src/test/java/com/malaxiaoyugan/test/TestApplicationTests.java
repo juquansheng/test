@@ -1,5 +1,6 @@
 package com.malaxiaoyugan.test;
 
+import com.alibaba.fastjson.JSONObject;
 import com.malaxiaoyugan.test.es.ESClientService;
 import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.search.SearchHit;
@@ -18,25 +19,29 @@ class TestApplicationTests {
     @Test
     void contextLoads() throws IOException {
 
-        String settings = "" +
-                "  {" +
-                "      \"number_of_shards\" : \"1\"," +
-                "      \"number_of_replicas\" : \"0\"" +
-                "   }";
-        String mappings = "{\n" +
-                "      \"properties\": {\n" +
-                "        \"title\": {\n" +
-                "          \"type\": \"text\"\n" +
-                "        },\n" +
-                "        \"name\": {\n" +
-                "          \"type\": \"keyword\"\n" +
-                "        },\n" +
-                "        \"age\": {\n" +
-                "          \"type\": \"integer\"\n" +
-                "        }\n" +
-                "      }\n" +
-                "    }";
-        esClientService.createIndex("yuukiindex12", settings, mappings);
+
+        JSONObject settingsJsonObject = new JSONObject();
+        settingsJsonObject.put("number_of_shards","1");
+        settingsJsonObject.put("number_of_replicas","0");
+
+        JSONObject analysisJsonObject = new JSONObject();
+        analysisJsonObject.put("analyzer","ik_max_word");
+        settingsJsonObject.put("analysis",analysisJsonObject);
+
+        String settings = settingsJsonObject.toJSONString();
+
+        System.out.println("settings:"+settings);
+
+        JSONObject jsonObject = new JSONObject();
+        JSONObject propertiesObject = new JSONObject();
+        JSONObject titleObject = new JSONObject();
+        titleObject.put("type","text");
+
+        propertiesObject.put("properties",titleObject);
+
+        jsonObject.put("properties",propertiesObject);
+        String mappings = jsonObject.toJSONString();
+        esClientService.createIndex("iktest121g31", settings, mappings);
 
     }
 
