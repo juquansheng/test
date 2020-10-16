@@ -26,8 +26,6 @@ import java.util.TreeMap;
 
 /**
  * 微信H5支付
- * 创建者 科帮网
- * 创建时间	2017年7月31日
  *
  */
 @Api(tags ="微信H5支付")
@@ -76,14 +74,6 @@ public class WeixinMobilePayController {
     }
 	/**
 	 * 预下单(对于已经产生的订单)
-	 * @Author  科帮网
-	 * @param request
-	 * @param response
-	 * @return
-	 * @throws Exception  String
-	 * @Date	2017年7月31日
-	 * 更新日志
-	 * 2017年7月31日  科帮网 首次创建
 	 *
 	 */
 	@SuppressWarnings("rawtypes")
@@ -150,12 +140,6 @@ public class WeixinMobilePayController {
 	}
 	/**
 	 * 手机支付完成回调
-	 * @Author  科帮网
-	 * @param request
-	 * @param response
-	 * @Date	2017年7月31日
-	 * 更新日志
-	 * 2017年7月31日  科帮网 首次创建
 	 *
 	 */
 	@ApiOperation(value="手机支付完成回调")

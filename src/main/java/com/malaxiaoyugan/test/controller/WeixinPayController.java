@@ -32,8 +32,6 @@ import java.util.TreeMap;
 
 /**
  * 微信支付
- * 创建者 科帮网
- * 创建时间	2017年7月31日
  */
 @Api(tags ="微信支付")
 @Controller
@@ -76,13 +74,6 @@ public class WeixinPayController {
     }
 	/**
 	 * 支付后台回调
-	 * @Author  科帮网
-	 * @param request
-	 * @param response
-	 * @throws Exception  void
-	 * @Date	2017年7月31日
-	 * 更新日志
-	 * 2017年7月31日  科帮网 首次创建
 	 *
 	 */
 	@SuppressWarnings({ "unchecked", "rawtypes" })
@@ -149,14 +140,6 @@ public class WeixinPayController {
 	}
 	/**
 	 * 模式一支付回调URL(生成二维码见 qrCodeUtil)
-	 * 商户支付回调URL设置指引：进入公众平台-->微信支付-->开发配置-->扫码支付-->修改
-	 * @Author  科帮网
-	 * @param request
-	 * @param response
-	 * @throws Exception  void
-	 * @Date	2017年8月3日
-	 * 更新日志
-	 * 2017年8月3日  科帮网 首次创建
 	 *
 	 */
 	@SuppressWarnings({ "unchecked", "rawtypes"})

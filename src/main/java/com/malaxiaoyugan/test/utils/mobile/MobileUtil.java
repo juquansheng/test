@@ -1,7 +1,9 @@
 package com.malaxiaoyugan.test.utils.mobile;
 
+
+
 import com.google.gson.Gson;
-import com.itstyle.modules.weixinpay.util.ConfigUtil;
+import com.malaxiaoyugan.test.utils.ConfigUtil;
 import org.dom4j.Document;
 import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
