@@ -1,6 +1,8 @@
 package com.malaxiaoyugan.test.controller;
 
 import com.alibaba.fastjson.JSONObject;
+import com.malaxiaoyugan.test.aspect.TryAgainException;
+import com.malaxiaoyugan.test.common.ApiResultEnum;
 import com.malaxiaoyugan.test.rabbitMQ.producer.RabbitMQService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,6 +29,10 @@ public class RabbitMQController {
         jsonObject.put("3",three);
 
         rabbitMQService.send(jsonObject);
+        if(false){
+            //如果更新失败就抛出去，重试
+            throw new TryAgainException(ApiResultEnum.ERROR_TRY_AGAIN);
+        }
         return "success";
     }
 }
