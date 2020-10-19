@@ -1,6 +1,7 @@
 package com.malaxiaoyugan.test.utils;
 
-import com.itstyle.common.constants.Constants;
+import com.malaxiaoyugan.test.common.Constants;
+import com.malaxiaoyugan.test.wxPay.config.WXConfigUtil;
 import org.apache.http.HttpEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpPost;
@@ -29,15 +30,15 @@ public class ClientCustomSSL {
          * 注意PKCS12证书 是从微信商户平台-》账户设置-》 API安全 中下载的 
          */  
         KeyStore keyStore  = KeyStore.getInstance("PKCS12");  
-        File certfile = ResourceUtils.getFile("classpath:cert"+ Constants.SF_FILE_SEPARATOR + ConfigUtil.CERT_PATH);
+        File certfile = ResourceUtils.getFile("classpath:cert"+ Constants.SF_FILE_SEPARATOR + WXConfigUtil.CERT_PATH);
         FileInputStream instream = new FileInputStream(certfile);
         try {  
-            keyStore.load(instream, ConfigUtil.MCH_ID.toCharArray());
+            keyStore.load(instream, WXConfigUtil.MCH_ID.toCharArray());
         } finally {  
             instream.close();  
         }  
         SSLContext sslcontext = SSLContexts.custom()
-                .loadKeyMaterial(keyStore, ConfigUtil.MCH_ID.toCharArray())
+                .loadKeyMaterial(keyStore, WXConfigUtil.MCH_ID.toCharArray())
                 .build();  
         SSLConnectionSocketFactory sslsf = new SSLConnectionSocketFactory(
                 sslcontext,  

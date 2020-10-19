@@ -1,13 +1,14 @@
 package com.malaxiaoyugan.test.aspect;
 
+import com.malaxiaoyugan.test.common.ApiException;
+import com.malaxiaoyugan.test.common.ApiResultEnum;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.transaction.annotation.Transactional;
-import top.lrshuai.optimisticlock.common.ApiException;
-import top.lrshuai.optimisticlock.common.ApiResultEnum;
+
 
 /**
  * 更新失败，尝试重试切片

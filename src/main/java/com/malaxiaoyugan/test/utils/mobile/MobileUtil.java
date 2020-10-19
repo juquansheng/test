@@ -3,7 +3,8 @@ package com.malaxiaoyugan.test.utils.mobile;
 
 
 import com.google.gson.Gson;
-import com.malaxiaoyugan.test.utils.ConfigUtil;
+
+import com.malaxiaoyugan.test.wxPay.config.WXConfigUtil;
 import org.dom4j.Document;
 import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
@@ -34,8 +35,8 @@ public class MobileUtil {
 	public static String getOpenId(String code){
 		if (code != null) {
 			String url = "https://api.weixin.qq.com/sns/oauth2/access_token?"
-					+ "appid="+ ConfigUtil.APP_ID
-					+ "&secret="+ ConfigUtil.APP_SECRET + "&code="
+					+ "appid="+ WXConfigUtil.APP_ID
+					+ "&secret="+ WXConfigUtil.APP_SECRET + "&code="
 					+code + "&grant_type=authorization_code";
 			String returnData = getReturnData(url);
 			Gson gson = new Gson();

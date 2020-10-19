@@ -4,10 +4,10 @@ package com.malaxiaoyugan.test.controller;
 import com.malaxiaoyugan.test.common.Constants;
 import com.malaxiaoyugan.test.dto.Product;
 import com.malaxiaoyugan.test.service.WeixinPayService;
-import com.malaxiaoyugan.test.utils.ConfigUtil;
 import com.malaxiaoyugan.test.utils.HttpUtil;
 import com.malaxiaoyugan.test.utils.PayCommonUtil;
 import com.malaxiaoyugan.test.utils.XMLUtil;
+import com.malaxiaoyugan.test.wxPay.config.WXConfigUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
@@ -107,7 +107,7 @@ public class WeixinPayController {
 			packageParams.put(parameter, v);
 		}
 		// 账号信息
-		String key = ConfigUtil.API_KEY; // key
+		String key = WXConfigUtil.API_KEY; // key
 		// 判断签名是否正确
 		if (PayCommonUtil.isTenpaySign("UTF-8", packageParams, key)) {
 			logger.info("微信支付成功回调");
@@ -174,10 +174,10 @@ public class WeixinPayController {
 			packageParams.put(parameter, v);
 		}
         //判断签名是否正确
-        if (PayCommonUtil.isTenpaySign("UTF-8", packageParams, ConfigUtil.API_KEY)) {
+        if (PayCommonUtil.isTenpaySign("UTF-8", packageParams, WXConfigUtil.API_KEY)) {
         	//统一下单
             SortedMap<Object, Object> params = new TreeMap<Object, Object>();
-    		ConfigUtil.commonParams(params);
+			WXConfigUtil.commonParams(params);
     		//随即生成一个 入库 走业务逻辑
     		String out_trade_no=Long.toString(System.currentTimeMillis());
     		params.put("body", "模式一扫码支付");// 商品描述
@@ -187,11 +187,11 @@ public class WeixinPayController {
     		params.put("notify_url", notify_url);// 回调地址
     		params.put("trade_type", "NATIVE");// 交易类型
     		
-    		String paramsSign = PayCommonUtil.createSign("UTF-8", params, ConfigUtil.API_KEY);
+    		String paramsSign = PayCommonUtil.createSign("UTF-8", params, WXConfigUtil.API_KEY);
     		params.put("sign", paramsSign);// 签名
     		String requestXML = PayCommonUtil.getRequestXml(params);
 
-    		String resXml = HttpUtil.postData(ConfigUtil.UNIFIED_ORDER_URL, requestXML);
+    		String resXml = HttpUtil.postData(WXConfigUtil.UNIFIED_ORDER_URL, requestXML);
     		Map<String, String>  payResult = XMLUtil.doXMLParse(resXml);
     		String returnCode =  payResult.get("return_code");
     		if("SUCCESS".equals(returnCode)){
@@ -201,11 +201,11 @@ public class WeixinPayController {
     				
                     String prepay_id = payResult.get("prepay_id");
                     SortedMap<Object, Object> prepayParams = new TreeMap<>();
-                    ConfigUtil.commonParams(params);
+					WXConfigUtil.commonParams(params);
                     prepayParams.put("prepay_id", prepay_id);
                     prepayParams.put("return_code", "SUCCESS");
                     prepayParams.put("result_code", "SUCCESS");
-                    String prepaySign =  PayCommonUtil.createSign("UTF-8", prepayParams, ConfigUtil.API_KEY);
+                    String prepaySign =  PayCommonUtil.createSign("UTF-8", prepayParams, WXConfigUtil.API_KEY);
                     prepayParams.put("sign", prepaySign);
                     String prepayXml = PayCommonUtil.getRequestXml(prepayParams);
                     

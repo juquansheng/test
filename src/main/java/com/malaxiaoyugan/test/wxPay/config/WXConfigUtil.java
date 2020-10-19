@@ -1,5 +1,8 @@
-package com.malaxiaoyugan.test.utils;
+package com.malaxiaoyugan.test.wxPay.config;
 
+import com.malaxiaoyugan.test.utils.HttpUtil;
+import com.malaxiaoyugan.test.utils.PayCommonUtil;
+import com.malaxiaoyugan.test.utils.XMLUtil;
 import org.apache.commons.configuration.Configuration;
 import org.apache.commons.configuration.ConfigurationException;
 import org.apache.commons.configuration.PropertiesConfiguration;
@@ -9,11 +12,9 @@ import java.util.SortedMap;
 import java.util.TreeMap;
 
 /**
- * 相关配置参数 
- * 创建者 科帮网 
- * 创建时间 2017年7月31日
+ * 相关配置参数
  */
-public class ConfigUtil {
+public class WXConfigUtil {
 	private static Configuration configs;
 	public  static String APP_ID;// 服务号的应用ID
 	public  static String APP_SECRET;// 服务号的应用密钥
@@ -92,8 +93,8 @@ public class ConfigUtil {
 	 */
 	public static void commonParams(SortedMap<Object, Object> packageParams) {
 		// 账号信息
-		String appid = ConfigUtil.APP_ID; // appid
-		String mch_id = ConfigUtil.MCH_ID; // 商业号
+		String appid = WXConfigUtil.APP_ID; // appid
+		String mch_id = WXConfigUtil.MCH_ID; // 商业号
 		// 生成随机字符串
 		String currTime = PayCommonUtil.getCurrTime();
 		String strTime = currTime.substring(8, currTime.length());
@@ -116,14 +117,14 @@ public class ConfigUtil {
 	@SuppressWarnings("rawtypes")
 	public static void shorturl(String urlCode) {
 		try {
-			String key = ConfigUtil.API_KEY; // key
+			String key = WXConfigUtil.API_KEY; // key
 			SortedMap<Object, Object> packageParams = new TreeMap<Object, Object>();
-			ConfigUtil.commonParams(packageParams);
+			WXConfigUtil.commonParams(packageParams);
 			packageParams.put("long_url", urlCode);// URL链接
 			String sign = PayCommonUtil.createSign("UTF-8", packageParams, key);
 			packageParams.put("sign", sign);// 签名
 			String requestXML = PayCommonUtil.getRequestXml(packageParams);
-			String resXml = HttpUtil.postData(ConfigUtil.SHORT_URL, requestXML);
+			String resXml = HttpUtil.postData(WXConfigUtil.SHORT_URL, requestXML);
 			Map map = XMLUtil.doXMLParse(resXml);
 			String returnCode = (String) map.get("return_code");
 			if ("SUCCESS".equals(returnCode)) {

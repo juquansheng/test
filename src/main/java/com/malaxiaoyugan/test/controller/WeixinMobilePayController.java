@@ -5,6 +5,7 @@ import com.malaxiaoyugan.test.dto.Product;
 import com.malaxiaoyugan.test.service.WeixinPayService;
 import com.malaxiaoyugan.test.utils.*;
 import com.malaxiaoyugan.test.utils.mobile.MobileUtil;
+import com.malaxiaoyugan.test.wxPay.config.WXConfigUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.apache.commons.lang3.StringUtils;
@@ -89,7 +90,7 @@ public class WeixinMobilePayController {
 		String notify_url =server_url+"/weixinMobile/WXPayBack";//回调接口
 		String trade_type = "JSAPI";// 交易类型H5支付 也可以是小程序支付参数
 		SortedMap<Object, Object> packageParams = new TreeMap<Object, Object>();
-		ConfigUtil.commonParams(packageParams);
+		WXConfigUtil.commonParams(packageParams);
 		packageParams.put("body","报告");// 商品描述
 		packageParams.put("out_trade_no", orderNo);// 商户订单号
 		packageParams.put("total_fee", totalFee);// 总金额
@@ -97,10 +98,10 @@ public class WeixinMobilePayController {
 		packageParams.put("notify_url", notify_url);// 回调地址
 		packageParams.put("trade_type", trade_type);// 交易类型
 		packageParams.put("openid", openId);//用户openID
-		String sign = PayCommonUtil.createSign("UTF-8", packageParams,ConfigUtil.API_KEY);
+		String sign = PayCommonUtil.createSign("UTF-8", packageParams,WXConfigUtil.API_KEY);
 		packageParams.put("sign", sign);// 签名
 		String requestXML = PayCommonUtil.getRequestXml(packageParams);
-		String resXml = HttpUtil.postData(ConfigUtil.UNIFIED_ORDER_URL, requestXML);
+		String resXml = HttpUtil.postData(WXConfigUtil.UNIFIED_ORDER_URL, requestXML);
 		Map map = XMLUtil.doXMLParse(resXml);
 		String returnCode = (String) map.get("return_code");
 		String returnMsg = (String) map.get("return_msg");
@@ -116,17 +117,17 @@ public class WeixinMobilePayController {
 				SortedMap<Object, Object> finalpackage = new TreeMap<>();
 				String timestamp = DateUtils.getTimestamp();
 				String nonceStr = packageParams.get("nonce_str").toString();
-				finalpackage.put("appId",  ConfigUtil.APP_ID);
+				finalpackage.put("appId",  WXConfigUtil.APP_ID);
 				finalpackage.put("timeStamp", timestamp);
 				finalpackage.put("nonceStr", nonceStr);
 				finalpackage.put("package", packages);  
 				finalpackage.put("signType", "MD5");
 				//这里很重要  参数一定要正确 狗日的腾讯 参数到这里就成大写了
 				//可能报错信息(支付验证签名失败 get_brand_wcpay_request:fail)
-				sign = PayCommonUtil.createSign("UTF-8", finalpackage,ConfigUtil.API_KEY);
+				sign = PayCommonUtil.createSign("UTF-8", finalpackage,WXConfigUtil.API_KEY);
 				url.append("redirect:/weixinMobile/payPage?");
 				url.append("timeStamp="+timestamp+"&nonceStr=" + nonceStr + "&package=" + packages);
-				url.append("&signType=MD5" + "&paySign=" + sign+"&appid="+ ConfigUtil.APP_ID);
+				url.append("&signType=MD5" + "&paySign=" + sign+"&appid="+ WXConfigUtil.APP_ID);
 				url.append("&orderNo="+orderNo+"&totalFee="+totalFee);
 			}else{
 				logger.info("订单号:{}错误信息:{}",orderNo,errCodeDes);

@@ -31,3 +31,6 @@ mybatis:
     default-statement-timeout: 3000
     #log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 # ==============================================================
+
+#微信后台回调
+  wexinpay.notify.url = https://***/weixin/pay
