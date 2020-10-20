@@ -33,4 +33,6 @@ mybatis:
 # ==============================================================
 
 #微信后台回调
-  wexinpay.notify.url = https://***/weixin/pay
+wexinpay:
+  notify:
+    url: https://***/weixin/pay
