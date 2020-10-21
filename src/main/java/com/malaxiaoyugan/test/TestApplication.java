@@ -9,7 +9,7 @@ import org.springframework.context.annotation.ComponentScan;
 public class TestApplication {
 
     public static void main(String[] args) {
-        System.setProperty("es.set.netty.runtime.available.processors", "false");
+        //System.setProperty("es.set.netty.runtime.available.processors", "false");
         SpringApplication.run(TestApplication.class, args);
     }
 
