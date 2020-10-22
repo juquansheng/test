@@ -16,10 +16,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 /**
  * @Description: 支付订单接口
- * @author dingzhiwei jmdhappy@126.com
- * @date 2017-07-05
- * @version V1.0
- * @Copyright: www.xxpay.org
  */
 @RestController
 @Slf4j
