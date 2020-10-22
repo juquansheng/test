@@ -1,11 +1,9 @@
 package com.malaxiaoyugan.test.utils;
 
+import com.alibaba.fastjson.JSONObject;
+
 /**
  * @Description: base64编码解码工具类
- * @author dingzhiwei jmdhappy@126.com
- * @date 2017-07-05
- * @version V1.0
- * @Copyright: www.xxpay.org
  */
 public class MyBase64 {
 	public final static String encode(byte[] src, int startIndex, int srclen) {
@@ -106,7 +104,14 @@ public class MyBase64 {
 	*  A simple test.cache that encodes and decodes the first commandline argument.
 	*/
 	public final static void main(String args[]) throws Exception {
-		String s = "xxpay做最好的开源聚合支付系统";
+		JSONObject jsonObject = new JSONObject();
+		jsonObject.put("test","test");
+		jsonObject.put("test1","test1");
+		jsonObject.put("test2","test2");
+		String s = jsonObject.toJSONString();
 		System.out.println(MyBase64.encode(s.getBytes()));
+		String encode = MyBase64.encode(s.getBytes());
+		System.out.println(encode);
+		System.out.println(new String(decode(encode)));
 	}
 }

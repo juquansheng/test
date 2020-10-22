@@ -35,10 +35,6 @@ import java.util.Map;
 
 /**
  * @Description: 支付渠道接口:微信
- * @author dingzhiwei jmdhappy@126.com
- * @date 2017-07-05
- * @version V1.0
- * @Copyright: www.xxpay.org
  */
 @RestController
 @Slf4j
