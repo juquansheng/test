@@ -2,7 +2,8 @@ package com.malaxiaoyugan.test.pay.mq;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.malaxiaoyugan.test.wxPay.service.BaseService;
+
+import com.malaxiaoyugan.test.pay.service.BaseService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;

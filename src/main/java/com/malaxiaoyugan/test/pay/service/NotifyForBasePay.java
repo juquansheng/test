@@ -21,7 +21,7 @@ import java.util.Map;
  */
 @Component
 @Slf4j
-public class Notify4BasePay extends BaseService {
+public class NotifyForBasePay extends BaseService {
 
 
 	@Autowired

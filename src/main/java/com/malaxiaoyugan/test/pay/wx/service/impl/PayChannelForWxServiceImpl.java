@@ -1,4 +1,4 @@
-package com.malaxiaoyugan.test.pay.service.impl;
+package com.malaxiaoyugan.test.pay.wx.service.impl;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
@@ -16,7 +16,7 @@ import com.malaxiaoyugan.test.enums.RetEnum;
 import com.malaxiaoyugan.test.pay.dao.model.PayChannel;
 import com.malaxiaoyugan.test.pay.dao.model.PayOrder;
 import com.malaxiaoyugan.test.pay.service.BaseService;
-import com.malaxiaoyugan.test.pay.service.PayChannel4WxService;
+import com.malaxiaoyugan.test.pay.wx.service.PayChannelForWxService;
 import com.malaxiaoyugan.test.pay.service.channel.wechat.WxPayProperties;
 import com.malaxiaoyugan.test.pay.service.channel.wechat.WxPayUtil;
 import com.malaxiaoyugan.test.utils.BeanConvertUtils;
@@ -36,8 +36,7 @@ import java.util.Map;
  */
 @Service
 @Slf4j
-public class PayChannel4WxServiceImpl extends BaseService implements PayChannel4WxService {
-
+public class PayChannelForWxServiceImpl extends BaseService implements PayChannelForWxService {
 
     @Resource
     private WxPayProperties wxPayProperties;

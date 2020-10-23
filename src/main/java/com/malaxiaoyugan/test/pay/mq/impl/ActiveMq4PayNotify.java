@@ -16,7 +16,7 @@ import org.springframework.stereotype.Component;
 
 import javax.jms.*;
 
-import static com.malaxiaoyugan.test.wxPay.service.mq.MqConfig.PAY_NOTIFY_QUEUE_NAME;
+import static com.malaxiaoyugan.test.pay.mq.MqConfig.PAY_NOTIFY_QUEUE_NAME;
 
 
 @Component

@@ -12,8 +12,8 @@ import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 
-import static com.malaxiaoyugan.test.wxPay.service.mq.MqConfig.PAY_NOTIFY_EXCHANGE_NAME;
-import static com.malaxiaoyugan.test.wxPay.service.mq.MqConfig.PAY_NOTIFY_QUEUE_NAME;
+import static com.malaxiaoyugan.test.pay.mq.MqConfig.PAY_NOTIFY_EXCHANGE_NAME;
+import static com.malaxiaoyugan.test.pay.mq.MqConfig.PAY_NOTIFY_QUEUE_NAME;
 
 
 @Component

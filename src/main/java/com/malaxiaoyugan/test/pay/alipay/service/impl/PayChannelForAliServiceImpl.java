@@ -1,4 +1,4 @@
-package com.malaxiaoyugan.test.pay.service.impl;
+package com.malaxiaoyugan.test.pay.alipay.service.impl;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
@@ -19,7 +19,7 @@ import com.malaxiaoyugan.test.enums.RetEnum;
 import com.malaxiaoyugan.test.pay.dao.model.PayChannel;
 import com.malaxiaoyugan.test.pay.dao.model.PayOrder;
 import com.malaxiaoyugan.test.pay.service.BaseService;
-import com.malaxiaoyugan.test.pay.service.PayChannel4AliService;
+import com.malaxiaoyugan.test.pay.alipay.service.PayChannelForAliService;
 import com.malaxiaoyugan.test.pay.service.channel.alipay.AlipayConfig;
 import com.malaxiaoyugan.test.utils.*;
 import lombok.extern.slf4j.Slf4j;
@@ -34,7 +34,7 @@ import java.util.Map;
 
 @Service
 @Slf4j
-public class PayChannel4AliServiceImpl extends BaseService implements PayChannel4AliService {
+public class PayChannelForAliServiceImpl extends BaseService implements PayChannelForAliService {
 
 
     @Autowired

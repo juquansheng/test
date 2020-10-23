@@ -25,7 +25,7 @@ import java.util.Map;
  */
 @RestController
 @Slf4j
-public class Notify4AliPayController {
+public class NotifyForAliPayController {
 
 	@Autowired
 	private NotifyPayService notifyPayService;

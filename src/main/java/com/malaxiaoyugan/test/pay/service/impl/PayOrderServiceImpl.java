@@ -4,8 +4,10 @@ import com.alibaba.fastjson.JSONObject;
 import com.malaxiaoyugan.test.common.PayConstant;
 import com.malaxiaoyugan.test.domain.BaseParam;
 import com.malaxiaoyugan.test.enums.RetEnum;
+import com.malaxiaoyugan.test.pay.alipay.service.PayChannelForAliService;
 import com.malaxiaoyugan.test.pay.dao.model.PayOrder;
 import com.malaxiaoyugan.test.pay.service.*;
+import com.malaxiaoyugan.test.pay.wx.service.PayChannelForWxService;
 import com.malaxiaoyugan.test.utils.*;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
@@ -25,10 +27,10 @@ public class PayOrderServiceImpl extends BaseService implements PayOrderService 
     private NotifyPayService notifyPayService;
 
     @Autowired
-    private PayChannel4WxService payChannel4WxService;
+    private PayChannelForWxService payChannel4WxService;
 
     @Autowired
-    private PayChannel4AliService payChannel4AliService;
+    private PayChannelForAliService payChannel4AliService;
 
     public int createPayOrder(JSONObject payOrder) {
         Map<String,Object> paramMap = new HashMap<>();

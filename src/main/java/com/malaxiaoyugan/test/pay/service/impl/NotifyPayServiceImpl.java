@@ -14,7 +14,7 @@ import com.malaxiaoyugan.test.enums.RetEnum;
 import com.malaxiaoyugan.test.pay.dao.model.PayChannel;
 import com.malaxiaoyugan.test.pay.dao.model.PayOrder;
 import com.malaxiaoyugan.test.pay.service.NotifyPayService;
-import com.malaxiaoyugan.test.pay.service.Notify4BasePay;
+import com.malaxiaoyugan.test.pay.service.NotifyForBasePay;
 import com.malaxiaoyugan.test.pay.service.channel.alipay.AlipayConfig;
 import com.malaxiaoyugan.test.pay.service.channel.wechat.WxPayUtil;
 import com.malaxiaoyugan.test.utils.JsonUtil;
@@ -33,7 +33,7 @@ import java.util.Map;
 
 @Service
 @Slf4j
-public class NotifyPayServiceImpl extends Notify4BasePay implements NotifyPayService {
+public class NotifyPayServiceImpl extends NotifyForBasePay implements NotifyPayService {
 
 
     @Autowired

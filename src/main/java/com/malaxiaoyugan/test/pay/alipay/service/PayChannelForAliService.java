@@ -1,9 +1,9 @@
-package com.malaxiaoyugan.test.pay.service;
+package com.malaxiaoyugan.test.pay.alipay.service;
 
 import java.util.Map;
 
 
-public interface PayChannel4AliService {
+public interface PayChannelForAliService {
 
     Map doAliPayWapReq(String jsonParam);
 

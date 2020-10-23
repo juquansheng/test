@@ -18,7 +18,7 @@ import java.io.IOException;
  */
 @RestController
 @Slf4j
-public class Notify4WxPayController {
+public class NotifyForWxPayController {
 
 
 	@Autowired
