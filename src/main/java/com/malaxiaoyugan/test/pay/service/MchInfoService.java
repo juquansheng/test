@@ -1,26 +1,14 @@
 package com.malaxiaoyugan.test.pay.service;
 
-import com.malaxiaoyugan.test.dao.mapper.MchInfoMapper;
-import com.malaxiaoyugan.test.dao.model.MchInfo;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import com.alibaba.fastjson.JSONObject;
+
+import java.util.Map;
 
 
-/**
- * @Description:
- * @author dingzhiwei jmdhappy@126.com
- * @date 2017-07-05
- * @version V1.0
- * @Copyright: www.xxpay.org
- */
-@Component
-public class MchInfoService {
+public interface MchInfoService {
 
-    @Autowired
-    private MchInfoMapper mchInfoMapper;
+    Map selectMchInfo(String jsonParam);
 
-    public MchInfo selectMchInfo(String mchId) {
-        return mchInfoMapper.selectByPrimaryKey(mchId);
-    }
+    JSONObject getByMchId(String mchId);
 
 }

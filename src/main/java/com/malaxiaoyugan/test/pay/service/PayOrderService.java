@@ -1,96 +1,34 @@
 package com.malaxiaoyugan.test.pay.service;
 
-import com.malaxiaoyugan.test.common.PayConstant;
-import com.malaxiaoyugan.test.dao.mapper.PayOrderMapper;
-import com.malaxiaoyugan.test.dao.model.PayOrder;
-import com.malaxiaoyugan.test.dao.model.PayOrderExample;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-import org.springframework.util.CollectionUtils;
+import com.alibaba.fastjson.JSONObject;
 
-import java.util.List;
+import java.util.Map;
 
-/**
- * @Description:
- */
-@Component
-public class PayOrderService {
 
-    @Autowired
-    private PayOrderMapper payOrderMapper;
+public interface PayOrderService {
 
-    public int createPayOrder(PayOrder payOrder) {
-        return payOrderMapper.insertSelective(payOrder);
-    }
+    Map createPayOrder(String jsonParam);
 
-    public PayOrder selectPayOrder(String payOrderId) {
-        return payOrderMapper.selectByPrimaryKey(payOrderId);
-    }
+    Map selectPayOrder(String jsonParam);
 
-    public PayOrder selectPayOrderByMchIdAndPayOrderId(String mchId, String payOrderId) {
-        PayOrderExample example = new PayOrderExample();
-        PayOrderExample.Criteria criteria = example.createCriteria();
-        criteria.andMchIdEqualTo(mchId);
-        criteria.andPayOrderIdEqualTo(payOrderId);
-        List<PayOrder> payOrderList = payOrderMapper.selectByExample(example);
-        return CollectionUtils.isEmpty(payOrderList) ? null : payOrderList.get(0);
-    }
+    Map selectPayOrderByMchIdAndPayOrderId(String jsonParam);
 
-    public PayOrder selectPayOrderByMchIdAndMchOrderNo(String mchId, String mchOrderNo) {
-        PayOrderExample example = new PayOrderExample();
-        PayOrderExample.Criteria criteria = example.createCriteria();
-        criteria.andMchIdEqualTo(mchId);
-        criteria.andMchOrderNoEqualTo(mchOrderNo);
-        List<PayOrder> payOrderList = payOrderMapper.selectByExample(example);
-        return CollectionUtils.isEmpty(payOrderList) ? null : payOrderList.get(0);
-    }
+    Map selectPayOrderByMchIdAndMchOrderNo(String jsonParam);
 
-    public int updateStatus4Ing(String payOrderId, String channelOrderNo) {
-        PayOrder payOrder = new PayOrder();
-        payOrder.setStatus(PayConstant.PAY_STATUS_PAYING);
-        if(channelOrderNo != null) payOrder.setChannelOrderNo(channelOrderNo);
-        payOrder.setPaySuccTime(System.currentTimeMillis());
-        PayOrderExample example = new PayOrderExample();
-        PayOrderExample.Criteria criteria = example.createCriteria();
-        criteria.andPayOrderIdEqualTo(payOrderId);
-        criteria.andStatusEqualTo(PayConstant.PAY_STATUS_INIT);
-        return payOrderMapper.updateByExampleSelective(payOrder, example);
-    }
+    Map updateStatus4Ing(String jsonParam);
 
-    public int updateStatus4Success(String payOrderId) {
-        PayOrder payOrder = new PayOrder();
-        payOrder.setPayOrderId(payOrderId);
-        payOrder.setStatus(PayConstant.PAY_STATUS_SUCCESS);
-        payOrder.setPaySuccTime(System.currentTimeMillis());
-        PayOrderExample example = new PayOrderExample();
-        PayOrderExample.Criteria criteria = example.createCriteria();
-        criteria.andPayOrderIdEqualTo(payOrderId);
-        criteria.andStatusEqualTo(PayConstant.PAY_STATUS_PAYING);
-        return payOrderMapper.updateByExampleSelective(payOrder, example);
-    }
+    Map updateStatus4Success(String jsonParam);
 
-    public int updateStatus4Complete(String payOrderId) {
-        PayOrder payOrder = new PayOrder();
-        payOrder.setPayOrderId(payOrderId);
-        payOrder.setStatus(PayConstant.PAY_STATUS_COMPLETE);
-        PayOrderExample example = new PayOrderExample();
-        PayOrderExample.Criteria criteria = example.createCriteria();
-        criteria.andPayOrderIdEqualTo(payOrderId);
-        criteria.andStatusEqualTo(PayConstant.PAY_STATUS_SUCCESS);
-        return payOrderMapper.updateByExampleSelective(payOrder, example);
-    }
+    Map updateStatus4Complete(String jsonParam);
 
-    public int updateNotify(String payOrderId, byte count) {
-        PayOrder newPayOrder = new PayOrder();
-        // TODO 并发下次数问题待解决
-        newPayOrder.setNotifyCount(count);
-        newPayOrder.setLastNotifyTime(System.currentTimeMillis());
-        newPayOrder.setPayOrderId(payOrderId);
-        return payOrderMapper.updateByPrimaryKeySelective(newPayOrder);
-    }
+    Map updateNotify(String jsonParam);
 
-    public int updateNotify(PayOrder payOrder) {
-        return payOrderMapper.updateByPrimaryKeySelective(payOrder);
-    }
+    int createPayOrder(JSONObject payOrder);
+
+    JSONObject queryPayOrder(String mchId, String payOrderId, String mchOrderNo, String executeNotify);
+
+    String doWxPayReq(String tradeType, JSONObject payOrder, String resKey);
+
+    String doAliPayReq(String channelId, JSONObject payOrder, String resKey);
 
 }
