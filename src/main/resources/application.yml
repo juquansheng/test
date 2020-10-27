@@ -36,3 +36,24 @@ mybatis:
 wexinpay:
   notify:
     url: https://***/weixin/pay
+
+
+
+
+mongodb:
+  #用户登录db
+  authenticationDatabase: common_job
+  #操作数据库db
+  db: common_job
+  username: wenge
+  password: 123456
+  hosts:
+    - 127.0.0.1
+    #- 127.0.0.1
+    #- 127.0.0.1
+  ports: 27017
+  #客户端的连接数
+  connections-per-host: 20
+  #客户端最小连接数
+  min-connections-per-host: 0
+  replica-set:
