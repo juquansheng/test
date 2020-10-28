@@ -1,6 +1,8 @@
 package com.malaxiaoyugan.test.mongoDB.service;
 
 import com.mongodb.DBObject;
+import org.bson.Document;
+import org.bson.conversions.Bson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.stereotype.Service;
@@ -24,13 +26,13 @@ public class MongoDBService {
      × save: 若新增数据的主键已经存在，则会对当前已经存在的数据进行修改操作。只能save一条数据
      * @param dbObject
      */
-    public void saveOne(DBObject dbObject,String collectionName){
-        mongoTemplate.getCollection(collectionName).save(dbObject);
+    public void saveOne(Bson dbObject, String collectionName){
+        mongoTemplate.getCollection(collectionName).createIndex(dbObject);
     }
-    public void insertOne(DBObject dbObject,String collectionName){
-        mongoTemplate.getCollection(collectionName).insert(dbObject);
+    public void insertOne(Bson dbObject,String collectionName){
+        mongoTemplate.getCollection(collectionName).createIndex(dbObject);
     }
-    public void insertMany(List<DBObject> dbObject,String collectionName){
-        mongoTemplate.getCollection(collectionName).insert(dbObject);
+    public void insertMany(List<Document> dbObject, String collectionName){
+        mongoTemplate.getCollection(collectionName).insertMany(dbObject);
     }
 }

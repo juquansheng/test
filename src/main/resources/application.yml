@@ -17,12 +17,12 @@ spring:
         write-dates-as-timestamps: true
 
 mapper:
-  mappers: com.malaxiaoyugan.test.BaseMapper
+  mappers: com.malaxiaoyugan.test.dao.mapper
   not-empty: false
   identity: mysql
 # mybatis
 mybatis:
-  type-aliases-package: com.mxd.dao.entity
+  type-aliases-package: com.malaxiaoyugan.dao.entity
   mapper-locations:  classpath*:mapper/*.xml
   configuration:
     jdbc-type-for-null: 'null'

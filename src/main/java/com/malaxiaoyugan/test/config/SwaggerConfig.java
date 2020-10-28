@@ -7,6 +7,7 @@ import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.ParameterBuilder;
+import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.schema.ModelRef;
 import springfox.documentation.service.ApiInfo;
@@ -33,18 +34,10 @@ public class SwaggerConfig implements WebMvcConfigurer {
                 .required(false).build(); //非必需，这里是全局配置，然而在登陆的时候是不用验证的
         List<Parameter> aParameters = new ArrayList<Parameter>();
         aParameters.add(aParameterBuilder.build());
-        return new Docket(DocumentationType.SWAGGER_2).apiInfo(productApiInfo())
+        return new Docket(DocumentationType.SWAGGER_2).apiInfo(apiInfo())
                 .groupName("v1").select()
                 .apis(RequestHandlerSelectors.basePackage("top.lrshuai"))
                 .build().globalOperationParameters(aParameters);
-    }
-
-    private ApiInfo productApiInfo() {
-        ApiInfo apiInfo = new ApiInfoBuilder()
-                .title("接口文档")
-                .version("1.0.0")
-                .build();
-        return apiInfo;
     }
 
 
@@ -62,5 +55,16 @@ public class SwaggerConfig implements WebMvcConfigurer {
                 .addResourceLocations("classpath:/META-INF/resources/webjars/");
         registry.addResourceHandler("/**")
                 .addResourceLocations("classpath:/static/");
+    }
+
+
+
+    private ApiInfo apiInfo() {
+        return new ApiInfoBuilder()
+                .title("接口文档")   //标题
+                .description("接口文档") //描述
+                .termsOfServiceUrl("-") //这里配置的是服务网站
+                .version("1.0") //版本
+                .build();
     }
 }

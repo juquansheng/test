@@ -6,6 +6,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.malaxiaoyugan.test.pay.service.BaseService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.web.client.RestTemplate;
 
@@ -15,10 +16,6 @@ import java.util.Date;
 
 /**
  * @Description: 业务通知MQ实现
- * @author dingzhiwei jmdhappy@126.com
- * @date 2017-07-05
- * @version V1.0
- * @Copyright: www.xxpay.org
  */
 @Slf4j
 public abstract class Mq4PayNotify extends BaseService {

@@ -4,11 +4,13 @@ import com.mongodb.MongoClient;
 import com.mongodb.MongoClientOptions;
 import com.mongodb.MongoCredential;
 import com.mongodb.ServerAddress;
+import com.mongodb.client.MongoDatabase;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+
 import org.springframework.data.mongodb.MongoDbFactory;
 import org.springframework.data.mongodb.core.SimpleMongoDbFactory;
 import org.springframework.stereotype.Component;
@@ -97,7 +99,7 @@ public class MongoConfig {
 
         //创建客户端和Factory
         MongoClient mongoClient = new MongoClient(serverAddresses, mongoCredentialList, mongoClientOptions);
-
+        //return mongoClient.getDatabase(applicationMongoDBConfig.getDb());
         return new SimpleMongoDbFactory(mongoClient, applicationMongoDBConfig.getDb());
     }
 }

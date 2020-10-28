@@ -2,8 +2,8 @@ package com.malaxiaoyugan.test.pay.service;
 
 import com.alibaba.fastjson.JSONObject;
 import com.malaxiaoyugan.test.common.PayConstant;
-import com.malaxiaoyugan.test.pay.dao.model.MchInfo;
-import com.malaxiaoyugan.test.pay.dao.model.PayOrder;
+import com.malaxiaoyugan.test.dao.entity.MchInfo;
+import com.malaxiaoyugan.test.dao.entity.PayOrder;
 import com.malaxiaoyugan.test.pay.mq.Mq4PayNotify;
 import com.malaxiaoyugan.test.utils.PayDigestUtil;
 import com.malaxiaoyugan.test.utils.PayUtil;

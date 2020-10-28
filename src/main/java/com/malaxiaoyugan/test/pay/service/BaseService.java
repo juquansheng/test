@@ -1,10 +1,10 @@
 package com.malaxiaoyugan.test.pay.service;
 
 import com.malaxiaoyugan.test.common.PayConstant;
-import com.malaxiaoyugan.test.pay.dao.mapper.MchInfoMapper;
-import com.malaxiaoyugan.test.pay.dao.mapper.PayChannelMapper;
-import com.malaxiaoyugan.test.pay.dao.mapper.PayOrderMapper;
-import com.malaxiaoyugan.test.pay.dao.model.*;
+import com.malaxiaoyugan.test.dao.mapper.MchInfoMapper;
+import com.malaxiaoyugan.test.dao.mapper.PayChannelMapper;
+import com.malaxiaoyugan.test.dao.mapper.PayOrderMapper;
+import com.malaxiaoyugan.test.dao.entity.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;

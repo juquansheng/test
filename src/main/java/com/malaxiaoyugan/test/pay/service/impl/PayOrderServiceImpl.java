@@ -5,7 +5,7 @@ import com.malaxiaoyugan.test.common.PayConstant;
 import com.malaxiaoyugan.test.domain.BaseParam;
 import com.malaxiaoyugan.test.enums.RetEnum;
 import com.malaxiaoyugan.test.pay.alipay.service.PayChannelForAliService;
-import com.malaxiaoyugan.test.pay.dao.model.PayOrder;
+import com.malaxiaoyugan.test.dao.entity.PayOrder;
 import com.malaxiaoyugan.test.pay.service.*;
 import com.malaxiaoyugan.test.pay.wx.service.PayChannelForWxService;
 import com.malaxiaoyugan.test.utils.*;

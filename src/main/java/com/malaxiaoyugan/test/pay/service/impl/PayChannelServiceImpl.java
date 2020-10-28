@@ -3,7 +3,7 @@ package com.malaxiaoyugan.test.pay.service.impl;
 import com.alibaba.fastjson.JSONObject;
 import com.malaxiaoyugan.test.domain.BaseParam;
 import com.malaxiaoyugan.test.enums.RetEnum;
-import com.malaxiaoyugan.test.pay.dao.model.PayChannel;
+import com.malaxiaoyugan.test.dao.entity.PayChannel;
 import com.malaxiaoyugan.test.pay.service.BaseService;
 import com.malaxiaoyugan.test.pay.service.PayChannelService;
 import com.malaxiaoyugan.test.utils.JsonUtil;
