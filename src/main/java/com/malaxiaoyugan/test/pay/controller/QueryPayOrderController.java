@@ -19,10 +19,6 @@ import java.util.Map;
 
 /**
  * @Description: 支付订单查询
- * @author dingzhiwei jmdhappy@126.com
- * @date 2017-08-31
- * @version V1.0
- * @Copyright: www.xxpay.org
  */
 @RestController
 @Slf4j

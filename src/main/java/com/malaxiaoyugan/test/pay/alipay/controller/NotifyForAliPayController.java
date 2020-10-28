@@ -18,10 +18,6 @@ import java.util.Map;
 
 /**
  * @Description: 接收处理支付宝通知
- * @author dingzhiwei jmdhappy@126.com
- * @date 2017-07-05
- * @version V1.0
- * @Copyright: www.xxpay.org
  */
 @RestController
 @Slf4j
