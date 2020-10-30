@@ -1,13 +1,25 @@
 package com.malaxiaoyugan.test.mongoDB.service;
 
-import com.mongodb.DBObject;
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
+import com.malaxiaoyugan.test.utils.MongoDBConvertUtils;
+import com.mongodb.*;
+import com.mongodb.client.AggregateIterable;
+import com.mongodb.client.FindIterable;
+import com.mongodb.client.MongoCursor;
 import org.bson.Document;
 import org.bson.conversions.Bson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.aggregation.Aggregation;
+import org.springframework.data.mongodb.core.aggregation.AggregationResults;
+import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import static org.springframework.data.mongodb.core.aggregation.Aggregation.newAggregationOptions;
 
 /**
  * description: MongoDBService
@@ -34,5 +46,50 @@ public class MongoDBService {
     }
     public void insertMany(List<Document> dbObject, String collectionName){
         mongoTemplate.getCollection(collectionName).insertMany(dbObject);
+    }
+    public void getAll(String collectionName){
+        mongoTemplate.getCollection(collectionName).find();
+    }
+
+
+    /**
+     *
+     * @param collectionName collection   新版本待测试 TODO
+     * @param field 字段
+     * @param value 字段值
+     * @return
+     */
+    public AggregateIterable<Document> getStatic(String collectionName, String field, String value){//例如abnormal，data.datas.abnormalType
+        Aggregation aggregation =
+                Aggregation.newAggregation(
+                        Aggregation.unwind("data.datas"),
+                        Aggregation.match(Criteria.where("_id").gt(0).lt(100000).and(field).is(value)),
+                        Aggregation.group("_id").count().as("count")
+                ).withOptions(newAggregationOptions().cursor(new Document()).build());
+
+
+        //查询方法一
+        AggregationResults<Document> aggregate = mongoTemplate.aggregate(aggregation, collectionName, Document.class);
+        Document rawResults = aggregate.getRawResults();
+        List<Document> result = rawResults.getList("result", Document.class);
+        System.out.println(result.toString());
+
+        //---------------------------------------------------
+        //查询方法二
+        AggregationOptions build = AggregationOptions.builder().outputMode(AggregationOptions.OutputMode.CURSOR).build();
+        List<Document> pipeLine = new ArrayList<>();
+        JSONArray pipelineJSONArray = JSONObject.parseObject(aggregation.toString()).getJSONArray("pipeline");
+
+        for (Object objects:pipelineJSONArray){
+            String toJSONString = JSONObject.toJSONString(objects);
+            pipeLine.add(MongoDBConvertUtils.toDocument(JSONObject.parseObject(toJSONString)));
+        }
+        AggregateIterable<Document> documents = mongoTemplate.getCollection(collectionName).aggregate(pipeLine);
+        MongoCursor<Document> iterator = documents.iterator();
+        while (iterator.hasNext()) {
+            System.out.println("cursor"+iterator.next());
+
+        }
+        return documents;
     }
 }
