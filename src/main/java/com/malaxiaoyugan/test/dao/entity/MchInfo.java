@@ -40,7 +40,7 @@ public class MchInfo implements Serializable {
     private String resKey;
 
     /**
-     * 商户状态,0-停止使用,1-使用中
+     * 商户状态,-1：停止使用,0：使用中
      *
      * @mbggenerated
      */
