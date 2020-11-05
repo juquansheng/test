@@ -14,7 +14,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @Import({DynamicDataSourceConfig.class})
 @SpringBootApplication(exclude = DataSourceAutoConfiguration.class)//排除自动配置
 @EnableScheduling //开启定时任务
-@ComponentScan(basePackages={"com.malaxiaoyugan.test.pay.mq","com.malaxiaoyugan.test.controller","com.malaxiaoyugan.test.rabbitMQ","com.malaxiaoyugan.test.mongoDB.config"})
+@ComponentScan(basePackages={"com.malaxiaoyugan.test.pay.mq","com.malaxiaoyugan.test.controller","com.malaxiaoyugan.test.config","com.malaxiaoyugan.test.rabbitMQ","com.malaxiaoyugan.test.mongoDB.config"})
 @MapperScan("com.malaxiaoyugan.test.dao")
 public class TestApplication {
 

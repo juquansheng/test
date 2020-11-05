@@ -44,7 +44,7 @@ mongodb:
   #用户登录db
   authenticationDatabase: common_job
   #操作数据库db
-  db: common_job
+  db: forum
   username: wenge
   password: 123456
   hosts:
