@@ -1,3 +1,4 @@
+/*
 package com.malaxiaoyugan.test;
 
 import org.junit.Test;
@@ -5,12 +6,14 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import java.net.MalformedURLException;
 
+*/
 /**
  * description: UrlTest
  * date: 2020/9/29 10:15
  * author: juquansheng
  * version: 1.0 <br>
- */
+ *//*
+
 @SpringBootTest
 public class UrlTest {
     @Test
@@ -26,3 +29,4 @@ public class UrlTest {
         System.out.println(host);
     }
 }
+*/

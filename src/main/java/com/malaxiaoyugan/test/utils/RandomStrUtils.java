@@ -66,6 +66,28 @@ public class RandomStrUtils {
         return randomStr;
     }
 
+    public String getRandomString(int len) {
+        Long nowTime = System.currentTimeMillis();
+        String randomStr = null;
+
+        synchronized (lock) {
+            // 生成随机字符串
+            randomStr = createRandomString(len, nowTime);
+
+            // 删除一分钟前的随机字符串
+            Iterator<Map.Entry<String, Long>> it = randomStrMap.entrySet().iterator();
+            while (it.hasNext()) {
+                Map.Entry<String, Long> entry = it.next();
+                Long value = entry.getValue();
+                if (nowTime - value > Constant.RPC_SEQ_NO_NOT_REPEAT_INTERVAL) {
+                    it.remove();
+                }
+            }
+        }
+
+        return randomStr;
+    }
+
     private String createRandomString(int len, Long nowTime) {
         Random random = new Random();
         int length = BASE_STRING.length;

@@ -45,7 +45,7 @@ public class WebsiteStatisticsController {
         String ipAddr = IPUtil.getIpAddr(request);
 
         DBObject dbObject = new BasicDBObject();
-        dbObject.put("_id", RandomStrUtils.getInstance().getRandomString());
+        dbObject.put("_id", RandomStrUtils.getInstance().getRandomString(32));
         dbObject.put("ip",ipAddr);
         dbObject.put("href",href);
         dbObject.put("time", DateUtilsByYuuki.getNowDateString());
