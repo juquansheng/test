@@ -10,10 +10,6 @@ import java.util.Date;
 
 /**
  * @Description: 日期时间工具类
- * @author dingzhiwei jmdhappy@126.com
- * @date 2017-07-05
- * @version V1.0
- * @Copyright: www.xxpay.org
  */
 public class DateUtil {
 

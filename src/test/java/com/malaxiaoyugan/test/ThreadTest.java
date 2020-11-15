@@ -1,3 +1,4 @@
+/*
 package com.malaxiaoyugan.test;
 
 import com.malaxiaoyugan.test.utils.ConcurrentCalculator;
@@ -15,19 +16,23 @@ import java.util.concurrent.*;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicReference;
 
+*/
 /**
  * description: ThreadTest
  * date: 2020/9/27 14:10
  * author: juquansheng
  * version: 1.0 <br>
- */
+ *//*
+
 @SpringBootTest
 public class ThreadTest {
 
 
-    /**
+    */
+/**
      * 获取CPU核心个数
-     */
+     *//*
+
     @Test
     public void getProcessors(){
         System.out.println(Runtime.getRuntime().availableProcessors());
@@ -109,3 +114,4 @@ public class ThreadTest {
     }
 
 }
+*/
