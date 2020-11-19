@@ -231,7 +231,7 @@ public class PayOrderController {
         // 验证签名数据
         boolean verifyFlag = PayUtil.verifyPaySign(params, reqKey);
         if(!verifyFlag) {
-            errorMessage = "Verify XX pay sign failed.";
+            errorMessage = "Verify pay sign failed.";
             return errorMessage;
         }
         // 验证参数通过,返回JSONObject对象
