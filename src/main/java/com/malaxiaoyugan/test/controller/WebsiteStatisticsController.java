@@ -13,6 +13,7 @@ import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
 import io.swagger.annotations.ApiOperation;
+import lombok.extern.slf4j.Slf4j;
 import org.bson.Document;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
@@ -28,7 +29,7 @@ import java.util.List;
 
 import static org.springframework.data.mongodb.core.aggregation.Aggregation.newAggregationOptions;
 
-
+@Slf4j
 @RequestMapping(value = "website")
 @RestController
 public class WebsiteStatisticsController {
@@ -45,6 +46,8 @@ public class WebsiteStatisticsController {
         String ipAddr = IPUtil.getIpAddr(request);
         String addressInfo = IPUtil.getAddressInfo(ipAddr);
 
+        log.info("ipAddr:{},addressInfo:{}",ipAddr,addressInfo);
+
         DBObject dbObject = new BasicDBObject();
         dbObject.put("_id", RandomStrUtils.getInstance().getRandomString(32));
         dbObject.put("ip",ipAddr);
@@ -56,7 +59,7 @@ public class WebsiteStatisticsController {
         mongoTemplate.getCollection("website_statistics").insertOne(MongoDBConvertUtils.toDocument(dbObject));
 
         //直接看下结果
-        System.out.println(mongoTemplate.getCollection("website_statistics").find());
+        //System.out.println(mongoTemplate.getCollection("website_statistics").find());
     }
 
 
