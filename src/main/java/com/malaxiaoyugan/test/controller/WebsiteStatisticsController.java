@@ -43,6 +43,7 @@ public class WebsiteStatisticsController {
     public void statistics(HttpServletRequest request,String href){
 
         String ipAddr = IPUtil.getIpAddr(request);
+        String addressInfo = IPUtil.getAddressInfo(ipAddr);
 
         DBObject dbObject = new BasicDBObject();
         dbObject.put("_id", RandomStrUtils.getInstance().getRandomString(32));
@@ -50,6 +51,7 @@ public class WebsiteStatisticsController {
         dbObject.put("href",href);
         dbObject.put("time", DateUtilsByYuuki.getNowDateString());
         dbObject.put("user_id","null");
+        dbObject.put("addressInfo",addressInfo);
 
         mongoTemplate.getCollection("website_statistics").insertOne(MongoDBConvertUtils.toDocument(dbObject));
 

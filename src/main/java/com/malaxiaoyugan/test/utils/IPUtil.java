@@ -1,6 +1,9 @@
 package com.malaxiaoyugan.test.utils;
 
+import com.alibaba.fastjson.JSONObject;
+
 import javax.servlet.http.HttpServletRequest;
+import java.io.IOException;
 import java.net.*;
 import java.util.ArrayList;
 import java.util.Enumeration;
@@ -134,6 +137,16 @@ public class IPUtil {
 			}
 		}
 		return IPStrSb.toString();
+	}
+
+	/**
+	 * 根据ip获取地址信息
+	 * @param ip
+	 * @return
+	 */
+	public static String getAddressInfo(String ip){
+		JSONObject jsonObject = HttpUtil.httpGet("http://whois.pconline.com.cn/ipJson.jsp?ip=" + ip + "&json=true");
+		return jsonObject.toJSONString();
 	}
 
 }
