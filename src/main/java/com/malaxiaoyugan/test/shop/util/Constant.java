@@ -1,7 +1,6 @@
 package com.malaxiaoyugan.test.shop.util;
 
 /**
- * Created by dingzhiwei on 17/6/2.
  */
 public class Constant {
 
