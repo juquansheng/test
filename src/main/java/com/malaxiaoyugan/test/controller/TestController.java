@@ -16,6 +16,8 @@ import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
 import io.swagger.annotations.ApiOperation;
+import lombok.extern.log4j.Log4j;
+import lombok.extern.slf4j.Slf4j;
 import org.bson.BsonDocument;
 import org.bson.Document;
 import org.bson.conversions.Bson;
@@ -32,12 +34,24 @@ import java.util.List;
 import static org.springframework.data.mongodb.core.aggregation.Aggregation.newAggregationOptions;
 
 
+@Slf4j
 @RequestMapping(value = "test")
 @RestController
 public class TestController {
 
     @Autowired
     private MongoTemplate mongoTemplate;
+
+
+    @ApiOperation(value = "test", notes = "test")
+    @RequestMapping(value = "test", method = RequestMethod.GET)
+    @ResponseBody
+    @CrossOrigin
+    public String test(){
+        log.info("test");
+        return "test";
+    }
+
 
     @ApiOperation(value = "mongoDBTest", notes = "mongoDBTest")
     @RequestMapping(value = "mongoDBTest", method = RequestMethod.GET)
