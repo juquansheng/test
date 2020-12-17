@@ -47,9 +47,18 @@ public class TestController {
     @RequestMapping(value = "test", method = RequestMethod.GET)
     @ResponseBody
     @CrossOrigin
-    public String test(){
-        log.info("test");
-        return "test";
+    public String test(String name){
+        log.info("test:"+name);
+        return "test:"+name;
+    }
+
+    @ApiOperation(value = "test2", notes = "test2")
+    @RequestMapping(value = "test2", method = RequestMethod.POST)
+    @ResponseBody
+    @CrossOrigin
+    public String test2(@RequestBody JSONObject jsonObject){
+        log.info(jsonObject.toJSONString());
+        return jsonObject.toJSONString();
     }
 
 

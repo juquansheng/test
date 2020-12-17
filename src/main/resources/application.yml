@@ -10,6 +10,8 @@ server:
   servlet:
     context-path: /yuuki/test/
 spring:
+    application:
+        name: test
     profiles:
       active: dev
     jackson:
