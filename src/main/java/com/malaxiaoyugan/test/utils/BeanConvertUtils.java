@@ -10,7 +10,7 @@ import java.util.Date;
 import java.util.Map;
 
 /**
- * Created by admin on 2016/5/4.
+ *
  */
 public class BeanConvertUtils {
 
