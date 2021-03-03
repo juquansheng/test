@@ -30,6 +30,12 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Stack;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.locks.Condition;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 import static org.springframework.data.mongodb.core.aggregation.Aggregation.newAggregationOptions;
 
@@ -162,6 +168,105 @@ public class TestController {
             System.out.println("cursor"+iterator.next());
 
         }
+    }
+
+    private int number = 0;
+    private Lock lock = new ReentrantLock();
+    private Condition condition = lock.newCondition();
+    private AtomicInteger atomicInteger;
+    public void increment() throws Exception {
+        lock.lock();
+        try {
+
+            while (number != 0) {
+                condition.await();
+            }
+            //do something
+            number++;
+            System.out.println(Thread.currentThread().getName() + "\t" + number);
+            condition.signalAll();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            lock.unlock();
+        }
+
+    }
+    private static void doSomeElse(){
+        double meanless = 0d;
+        for(int i=0; i<10000; i++){
+            meanless += Math.random();
+        }
+    }
+    public static void main(String[] args) throws Exception {
+
+    //TestController testController = new TestController();
+        threadBlockedByLock();
+
+    }
+
+    private static void threadStateTerminate(){
+        System.out.println("--------------------------");
+        System.out.print("Finish Job Thread State：");
+        Thread thread = new Thread(()->{
+
+        }, "Thread Finish Job");
+        thread.start();
+
+
+        try {
+            //Main Thread Will Wait util this thread finished job
+            thread.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        //print TERMINATED
+        System.out.println(thread.getState());
+        System.out.println("--------------------------");
+    }
+
+
+    private static void threadBlockedByLock(){
+        System.out.println("--------------------------");
+        System.out.print("Thread State Blocked By Lock：");
+        ReentrantLock lock = new ReentrantLock(false);
+        Thread thread = new Thread(()->{
+            lock.lock();
+        }, "Blocked Thread");
+
+        //System.out.println("lock1"+lock);
+        lock.lock();
+        //lock.lock();
+        //System.out.println("lock2"+lock);
+
+        thread.start();
+        doSomeElse();
+        //print WAITING
+        System.out.println(thread.getState());
+        System.out.println(Thread.currentThread().getState());
+
+        lock.unlock();
+        doSomeElse();
+        System.out.println(thread.getState());
+        System.out.println("--------------------------");
+    }
+
+    private static void threadBlockedBySynchronized(){
+        System.out.println("--------------------------");
+        System.out.print("Thread Blocked By Synchronized：");
+        Thread thread = new Thread(()->{
+            synchronized (TestController.class){
+
+            }
+        }, "Blocked by Synchronized Thread");
+
+        synchronized (TestController.class){
+            thread.start();
+            doSomeElse();
+            //print BLOCKED
+            System.out.println(thread.getState());
+        }
+        System.out.println("--------------------------");
     }
 
 }
