@@ -7,5 +7,6 @@ import java.lang.annotation.RetentionPolicy;
  * 重试注解
  */
 @Retention(RetentionPolicy.RUNTIME)
-public @interface IsTryAgain {
+public @interface TryAgain {
+    int value() default 3;
 }
