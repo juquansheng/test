@@ -1,47 +1,51 @@
 package com.malaxiaoyugan.test.aspect;
 
+
+
 import com.malaxiaoyugan.test.common.ApiException;
 import com.malaxiaoyugan.test.common.ApiResultEnum;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
+import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.lang.reflect.Method;
 
 
 /**
  * 更新失败，尝试重试切片
- * @author  rstyro
  */
 @Aspect
 @Configuration
 public class TryAgainAspect {
 
-	/**
-	 * 默认重试几次
-	 */
-	private static final int    DEFAULT_MAX_RETRIES = 3;
-
-	private int                 maxRetries          = DEFAULT_MAX_RETRIES;
-	private int                 order               = 1;
-
-	public void setMaxRetries(int maxRetries) {
-		this.maxRetries = maxRetries;
-	}
+	private int order = 1;
 
 	public int getOrder() {
 		return this.order;
 	}
 
-	@Pointcut("@annotation(IsTryAgain)")
+	@Pointcut("@annotation(TryAgain)")
 	public void retryOnOptFailure() {
 		// pointcut mark
 	}
 
+
 	@Around("retryOnOptFailure()")
 	@Transactional(rollbackFor = Exception.class)
 	public Object doConcurrentOperation(ProceedingJoinPoint pjp) throws Throwable {
+
+		Method method = ((MethodSignature) pjp.getSignature()).getMethod();
+		//获取全部注解
+		//Annotation[][] parameterAnnotations = method.getParameterAnnotations();
+		//获取目标注解
+		TryAgain tryAgain = method.getAnnotation(TryAgain.class);
+
+		int maxRetries = tryAgain.value();
+
 		int numAttempts = 0;
 		do {
 			numAttempts++;
@@ -58,8 +62,6 @@ public class TryAgainAspect {
 					System.out.println("=====正在重试====="+numAttempts+"次");
 				}
 			}
-		} while (numAttempts <= this.maxRetries);
-
-		return null;
+		} while (true);
 	}
 }
