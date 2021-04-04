@@ -1,7 +1,6 @@
 package com.malaxiaoyugan.test.utils;
 
 import lombok.extern.slf4j.Slf4j;
-import sun.rmi.runtime.Log;
 
 import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Field;
@@ -11,7 +10,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.logging.Logger;
 
 /**
  * @Description:

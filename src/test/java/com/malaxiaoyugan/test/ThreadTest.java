@@ -1,4 +1,3 @@
-/*
 package com.malaxiaoyugan.test;
 
 import com.malaxiaoyugan.test.utils.ConcurrentCalculator;
@@ -6,32 +5,26 @@ import com.malaxiaoyugan.test.utils.ConcurrentCalculatorAsync;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.RandomUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.joda.time.LocalDateTime;
 import org.junit.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.*;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicReference;
 
-*/
-/**
- * description: ThreadTest
- * date: 2020/9/27 14:10
- * author: juquansheng
- * version: 1.0 <br>
- *//*
+
+
 
 @SpringBootTest
 public class ThreadTest {
 
 
-    */
-/**
-     * 获取CPU核心个数
-     *//*
+
 
     @Test
     public void getProcessors(){
@@ -113,5 +106,47 @@ public class ThreadTest {
         System.out.println(random.nextInt(1000));
     }
 
+
+    @Test
+    public void test5() throws InterruptedException {
+        long time = new Date().getTime();
+        System.out.println("执行开始:" + Thread.currentThread().getName());
+
+        for (int i = 0;i< 100000;i++) {
+            Thread thread = new Thread(() -> {
+                try {
+                    //Thread.sleep(1000);
+                    System.out.println("执行:" + Thread.currentThread().getName());
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            });
+            thread.start();
+
+        }
+        long time1 = new Date().getTime();
+        System.out.println("执行结束:" + (time1-time));
+    }
+
+    @Test
+    public void test6() throws InterruptedException {
+        long time = new Date().getTime();
+        System.out.println("执行开始:" + LocalDateTime.now());
+        ExecutorService executorService = Executors.newSingleThreadExecutor();
+        for (int i = 0;i< 100000;i++) {
+            executorService.execute(() -> {
+                try {
+                    Thread.sleep(1000);
+                    System.out.println("执行:" + Thread.currentThread().getName());
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            });
+        }
+
+        executorService.shutdown();
+        executorService.awaitTermination(1,TimeUnit.DAYS);
+        long time1 = new Date().getTime();
+        System.out.println("执行结束:" + (time1-time));
+    }
 }
-*/
