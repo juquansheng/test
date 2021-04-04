@@ -6,6 +6,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.context.annotation.Import;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
@@ -16,6 +17,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @EnableScheduling //开启定时任务
 @ComponentScan(basePackages={"com.malaxiaoyugan.test.filter","com.malaxiaoyugan.test.pay.mq","com.malaxiaoyugan.test.controller","com.malaxiaoyugan.test.config","com.malaxiaoyugan.test.rabbitMQ","com.malaxiaoyugan.test.mongoDB.config"})
 @MapperScan("com.malaxiaoyugan.test.dao")
+//@EnableAspectJAutoProxy//
 public class TestApplication {
 
     public static void main(String[] args) {
