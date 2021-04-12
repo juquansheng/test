@@ -48,6 +48,28 @@ public class TestController {
     @Autowired
     private MongoTemplate mongoTemplate;
 
+    final ReentrantLock lockTest = new ReentrantLock();
+    @ApiOperation(value = "lockTest", notes = "lockTest")
+    @RequestMapping(value = "lockTest", method = RequestMethod.GET)
+    @ResponseBody
+    @CrossOrigin
+    public String test() {
+
+        if (lockTest.tryLock()){
+            try {
+                //lock.lock();
+                Thread.sleep(10000);
+                return "获取成功";
+            }catch (Exception e){
+                return "获取异常";
+            }finally {
+                lockTest.unlock();
+            }
+        }else {
+            return "获取失败";
+        }
+
+    }
 
     @ApiOperation(value = "test", notes = "test")
     @RequestMapping(value = "test", method = RequestMethod.GET)

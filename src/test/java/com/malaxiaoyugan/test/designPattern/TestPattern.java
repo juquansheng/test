@@ -1,14 +1,17 @@
 package com.malaxiaoyugan.test.designPattern;
 
+import org.junit.Test;
+
 /**
  * description: Test
  * date: 2021/3/30 10:25
  * author: juquansheng
  * version: 1.0 <br>
  */
-public class Test {
+public class TestPattern {
 
-    @org.junit.Test
+    //建造者
+    @Test
     public void test(){
         Computer.Builder builder = new Computer.Builder("1", "1");
         System.out.println(builder);
