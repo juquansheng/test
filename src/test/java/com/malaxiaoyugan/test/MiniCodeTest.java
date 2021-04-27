@@ -1,5 +1,6 @@
 package com.malaxiaoyugan.test;
 
+import org.assertj.core.util.Sets;
 import org.junit.Test;
 import java.util.*;
 
@@ -19,14 +20,27 @@ public class MiniCodeTest {
         mapping.put("9", Arrays.asList("W","X","Y","Z"));
     }
 
-
     @Test
     public void test(){
+        int[] arr9 = {1,2,3,4,5,9};
+        letters9(arr9);
+        int[] arr99 = {23,92};
+        letters99(arr99);
+    }
+
+
+    public void letters9(int[] arr){
         List<List<String>> arrayLists = new ArrayList<>();
-        //组装参数
-        int[] arr = {1,2,3,4,5,9};
 
         for (int a:arr){
+            if (a < 0){
+                System.out.println("参数有误："+a+"小于0");
+                return;
+            }
+            if (a > 9){
+                System.out.println("参数有误："+a+"大于9");
+                return;
+            }
             if (mapping.get(Integer.toString(a)) != null){
                 arrayLists.add(mapping.get(Integer.toString(a)));
             }
@@ -38,14 +52,66 @@ public class MiniCodeTest {
             return;
         }
         //打印结果
+        System.out.println("----------letters9结果：");
         list.get(0).forEach(a->{
-            System.out.println("结果："+a);
+            System.out.print(""+a+" ");
         });
-
+        System.out.println();
+        System.out.println("----------letters9结束：");
     }
 
+    public void letters99(int[] arr){
+        List<List<String>> arrayLists = new ArrayList<>();
 
-    public List<List<String>> getCombination(List<List<String>> arrayLists){
+        for (int a:arr){
+
+            if (a < 0){
+                System.out.println("参数有误："+a+"小于0");
+                return;
+            }
+            if (a > 99){
+                System.out.println("参数有误："+a+"大于99");
+                return;
+            }
+
+            List<String> list = getList(a);
+            arrayLists.add(list);
+        }
+        //返回结果
+        List<List<String>> list = getCombination(arrayLists);
+        if (list == null || list.size() < 1){
+            System.out.println("结果：null");
+            return;
+        }
+        //打印结果
+        System.out.println("----------letters99结果：");
+        list.get(0).forEach(a->{
+            System.out.print(""+a+" ");
+        });
+        System.out.println();
+        System.out.println("----------letters99结束：");
+    }
+
+    //根据数字获取参数数据  例如26 既 A B C + M N O
+    private List<String> getList(int params){
+        List<String> list = new ArrayList<>();
+
+        String s = Integer.toString(params);
+        int length = s.length();
+        for (int i=0;i<length;i++){
+            String substring = s.substring(i, i + 1);
+            if (mapping.get(substring) != null){
+                list.addAll(mapping.get(substring));
+            }
+        }
+        HashSet<String> strings = Sets.newHashSet(list);
+        list.clear();
+        list.addAll(strings);
+        return list;
+    }
+
+    //根据数组获取排列组合结果
+    private List<List<String>> getCombination(List<List<String>> arrayLists){
 
         int len=arrayLists.size();
         //小于2，说明已经递归完成
