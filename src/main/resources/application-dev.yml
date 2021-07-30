@@ -66,7 +66,7 @@ fdfs:
         width: 200
         height: 200
     tracker-list:
-        - 43.254.45.11:22122
+    #- ***.***.***.***:22122
 
 
 es:
@@ -91,3 +91,5 @@ rabbitmq:
     listener:
         simple:
             acknowledge-mode: manual
+
+

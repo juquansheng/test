@@ -29,5 +29,22 @@ public class test1 {
         proxy.sayHello("Mikan");
     }
 
+    public void test1(){
+
+        System.out.println("test");
+
+    }
+
+    public void test2(){
+        System.out.println("test");
+    }
+
+    @Test
+    public  void  test11(){
+        test1();
+        test2();
+    }
 
 }
+
+

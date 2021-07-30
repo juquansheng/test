@@ -23,7 +23,7 @@ import java.util.Objects;
  */
 @Slf4j
 @WebFilter(filterName = "requestWrapperFilter", urlPatterns = "/*")
-@Component
+//@Component
 public class RequestFilter implements Filter {
     public static final String TRACE_ID = "trace";
     public static final String SPAN_ID = "span";

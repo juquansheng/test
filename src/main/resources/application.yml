@@ -13,7 +13,7 @@ spring:
     application:
         name: test
     profiles:
-      active: dev
+      active: local
     jackson:
       serialization:
         write-dates-as-timestamps: true
